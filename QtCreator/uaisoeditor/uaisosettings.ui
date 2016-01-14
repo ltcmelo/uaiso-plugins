@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UaisoQtc::UaisoSettingsPage</class>
+ <widget class="QWidget" name="UaisoQtc::UaisoSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>654</width>
+    <height>345</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>601</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Language-specific settings</string>
+   </property>
+   <widget class="QCheckBox" name="enabledCheck">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>75</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enabled</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="interpreterLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>72</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Interpreter:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="interpreterEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>60</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="sysPathLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>87</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>System paths:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="sysPathEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>90</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="extraPathLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>75</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Extra paths:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="extraPathEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>120</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>interpreterEdit</zorder>
+   <zorder></zorder>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>530</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QLabel" name="langLabel">
+      <property name="text">
+       <string>Language:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="langCombo"/>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>601</width>
+     <height>44</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Note 1: Enabling and disabling a language requires restart.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Note 2: Paths must be colon-separated.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <zorder>langLabel</zorder>
+  <zorder>langCombo</zorder>
+  <zorder>langCombo</zorder>
+  <zorder>enabledCheck</zorder>
+  <zorder>interpreterLabel</zorder>
+  <zorder>interpreterEdit</zorder>
+  <zorder>label</zorder>
+  <zorder>label_3</zorder>
+  <zorder>sysPathLabel</zorder>
+  <zorder>extraPathLabel</zorder>
+  <zorder>sysPathEdit</zorder>
+  <zorder>extraPathEdit</zorder>
+  <zorder>sysPathEdit</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>label</zorder>
+  <zorder>verticalSpacer</zorder>
+  <zorder></zorder>
+  <zorder>horizontalSpacer_2</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>leandroSlot()</slot>
+ </slots>
+</ui>

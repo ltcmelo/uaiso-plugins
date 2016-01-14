@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+    <mime-type type="text/x-gosrc">
+        <sub-class-of type="text/plain"/>
+        <comment>Go Source file</comment>
+        <glob pattern="*.go"/>
+    </mime-type>
+    <mime-type type="text/x-dsrc">
+        <sub-class-of type="text/plain"/>
+        <comment>D Source file</comment>
+        <glob pattern="*.d"/>
+    </mime-type>
+    <mime-type type="text/x-rustsrc">
+        <sub-class-of type="text/plain"/>
+        <comment>Rust Source file</comment>
+        <glob pattern="*.rs"/>
+    </mime-type>
+    <mime-type type="text/x-python">
+        <sub-class-of type="text/plain"/>
+        <comment>Python Source file</comment>
+        <glob pattern="*.py"/>
+    </mime-type>
+</mime-info>

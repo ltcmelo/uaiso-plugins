@@ -1,0 +1,9 @@
+The Uaiso project is a language-unifying source code modelling engine.
+
+This repository contains Uaiso plugins for IDEs and text editors. For the
+main project, please refer to: https://github.com/ltcmelo/uaiso
+
+General instructions (per IDE/text editor):
+
+- Qt Creator: The uaisoeditor directory should be go into
+  $QTCREATOR/src/plugins.
