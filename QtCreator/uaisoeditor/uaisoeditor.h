@@ -42,7 +42,7 @@
      * not even complete. The primary concern is to demonstrate Uaiso's API.
      */
 
-#include <Parsing/LangName.h>
+#include <Parsing/LangId.h>
 #include <Parsing/LexemeMap.h>
 #include <Parsing/TokenMap.h>
 #include <Semantic/Snapshot.h>

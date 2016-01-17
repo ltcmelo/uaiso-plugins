@@ -82,7 +82,7 @@ QWidget *UaisoSettingsPage::widget()
         m_d->m_page->setupUi(m_d->m_widget);
         m_d->m_page->langCombo->setCurrentIndex(0);
 
-        for (auto lang : supportedLangs()) {
+        for (auto lang : availableLangs()) {
             m_d->m_page->langCombo->addItem(QString::fromStdString(langName(lang)),
                                             QVariant::fromValue(static_cast<int>(lang)));
         }
@@ -196,7 +196,7 @@ void UaisoSettings::load(QSettings *settings,
 
 void UaisoSettings::load(QSettings *settings)
 {
-    for (auto lang : supportedLangs()) {
+    for (auto lang : availableLangs()) {
         auto& option = m_options[static_cast<int>(lang)];
         load(settings,
                      option,

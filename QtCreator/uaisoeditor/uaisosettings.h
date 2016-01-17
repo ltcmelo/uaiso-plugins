@@ -32,7 +32,7 @@
      * not even complete. The primary concern is to demonstrate Uaiso's API.
      */
 
-#include <Parsing/LangName.h>
+#include <Parsing/LangId.h>
 
 QT_BEGIN_NAMESPACE
 class QSettings;

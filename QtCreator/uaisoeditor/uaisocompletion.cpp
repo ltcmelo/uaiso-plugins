@@ -38,7 +38,7 @@
 #include <Parsing/Factory.h>
 #include <Parsing/IncrementalLexer.h>
 #include <Parsing/Lang.h>
-#include <Parsing/LangName.h>
+#include <Parsing/LangId.h>
 #include <Parsing/Lexeme.h>
 #include <Parsing/LexemeMap.h>
 #include <Parsing/Phrasing.h>
