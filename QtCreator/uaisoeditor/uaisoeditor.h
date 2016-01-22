@@ -65,7 +65,7 @@ class UaisoSettingsPage;
     //--- Plugin ---//
     //--------------//
 
-void addSearchPaths(uaiso::Manager* manager, uaiso::LangName);
+void addSearchPaths(uaiso::Manager* manager, uaiso::LangId);
 
 class UaisoEditorPlugin : public ExtensionSystem::IPlugin
 {
@@ -132,7 +132,7 @@ signals:
     void requestDiagnosticsUpdate();
 
 private slots:
-    void configure(const QString &oldPath, const QString &path);
+    void configure(const Utils::FileName &oldPath, const Utils::FileName &path);
     void updateFontSettings(const TextEditor::FontSettings& fs);
 
     // Parsing, binding, type-checking.

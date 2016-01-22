@@ -25,7 +25,6 @@
 #include <coreplugin/actionmanager/actionmanager.h>
 #include <coreplugin/coreconstants.h>
 #include <coreplugin/icore.h>
-#include <coreplugin/mimedatabase.h>
 #include <coreplugin/navigationwidget.h>
 #include <coreplugin/progressmanager/progressmanager.h>
 #include <texteditor/fontsettings.h>
@@ -34,6 +33,8 @@
 #include <texteditor/texteditorsettings.h>
 #include <texteditor/semantichighlighter.h>
 #include <utils/qtcassert.h>
+#include <utils/mimetypes/mimedatabase.h>
+#include <utils/fileutils.h>
 
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -107,12 +108,9 @@ UaisoEditorPlugin *UaisoEditorPlugin::instance()
 }
 
 bool UaisoEditorPlugin::initialize(const QStringList & /*arguments*/,
-                                   QString *errorMessage)
+                                   QString *)
 {
-    if (!Core::MimeDatabase::addMimeTypes(QLatin1String(
-            ":/uaisoeditor/UaisoEditor.mimetypes.xml"), errorMessage)) {
-        return false;
-    }
+    Utils::MimeDatabase::addMimeTypes(QLatin1String(":/uaisoeditor/UaisoEditor.mimetypes.xml"));
 
     addAutoReleasedObject(new UaisoEditorFactory);
     addAutoReleasedObject(m_settingsPage);
@@ -139,11 +137,11 @@ UaisoEditorFactory::UaisoEditorFactory()
 
     UaisoSettings settings;
     settings.load(Core::ICore::settings());
-    if (settings.m_options[static_cast<int>(uaiso::LangName::D)].m_enabled)
+    if (settings.m_options[static_cast<int>(uaiso::LangId::D)].m_enabled)
         addMimeType(QLatin1String(Constants::D_MIMETYPE));
-    if (settings.m_options[static_cast<int>(uaiso::LangName::Go)].m_enabled)
+    if (settings.m_options[static_cast<int>(uaiso::LangId::Go)].m_enabled)
         addMimeType(QLatin1String(Constants::GO_MIMETYPE));
-    if (settings.m_options[static_cast<int>(uaiso::LangName::Py)].m_enabled)
+    if (settings.m_options[static_cast<int>(uaiso::LangId::Py)].m_enabled)
         addMimeType(QLatin1String(Constants::PY_MIMETYPE));
     //addMimeType(QLatin1String(Constants::RUST_MIMETYPE));
 
@@ -179,8 +177,8 @@ UaisoEditorDocument::UaisoEditorDocument()
     m_semanticCheckTimer.setInterval(kSemanticCheckInterval);
     connect(&m_semanticCheckTimer, SIGNAL(timeout()), this, SLOT(bindAndCheck()));
 
-    connect(this, SIGNAL(filePathChanged(QString,QString)),
-            this, SLOT(configure(QString,QString)));
+    connect(this, &UaisoEditorDocument::filePathChanged,
+            this, &UaisoEditorDocument::configure);
 
     connect(TextEditorSettings::instance(), SIGNAL(fontSettingsChanged(TextEditor::FontSettings)),
             this, SLOT(updateFontSettings(TextEditor::FontSettings)));
@@ -195,18 +193,18 @@ UaisoEditorDocument::~UaisoEditorDocument()
     }
 }
 
-void UaisoEditorDocument::configure(const QString &oldPath, const QString &path)
+void UaisoEditorDocument::configure(const Utils::FileName &oldPath, const Utils::FileName &path)
 {
     Q_UNUSED(oldPath);
 
-    QFileInfo fileInfo(path);
+    QFileInfo fileInfo = path.toFileInfo();
     const QString& suffix = fileInfo.suffix();
     if (suffix == QLatin1String("d"))
-        m_factory = uaiso::FactoryCreator::create(uaiso::LangName::D);
+        m_factory = uaiso::FactoryCreator::create(uaiso::LangId::D);
     else if (suffix == QLatin1String("go"))
-        m_factory = uaiso::FactoryCreator::create(uaiso::LangName::Go);
+        m_factory = uaiso::FactoryCreator::create(uaiso::LangId::Go);
     else if (suffix == QLatin1String("py"))
-        m_factory = uaiso::FactoryCreator::create(uaiso::LangName::Py);
+        m_factory = uaiso::FactoryCreator::create(uaiso::LangId::Py);
 
     m_unit = m_factory->makeUnit();
 
@@ -239,12 +237,12 @@ void UaisoEditorDocument::parse()
 {
     m_syntaxCheckTimer.stop();
 
-    PLUGIN->tokens()->clear(filePath().toStdString());
-    PLUGIN->lexemes()->clear(filePath().toStdString());
+    PLUGIN->tokens()->clear(filePath().toString().toStdString());
+    PLUGIN->lexemes()->clear(filePath().toString().toStdString());
 
     std::string code = plainText().toStdString();
     m_unit->assignInput(code);
-    m_unit->setFileName(filePath().toStdString());
+    m_unit->setFileName(filePath().toString().toStdString());
     m_unit->parse(PLUGIN->tokens(), PLUGIN->lexemes());
     m_reports.reset(m_unit->releaseReports());
 
@@ -436,7 +434,7 @@ UaisoEditorWidget::createAssistInterface(AssistKind kind,
         auto doc = static_cast<UaisoEditorDocument*>(textDocument());
         return new UaisoAssistInterface(document(),
                                         position(),
-                                        textDocument()->filePath(),
+                                        textDocument()->filePath().toString(),
                                         reason,
                                         doc->m_factory.get());
     }
@@ -578,7 +576,7 @@ void UaisoHoverHandler::identifyMatch(TextEditorWidget *widget, int pos)
     }
 }
 
-void UaisoQtc::addSearchPaths(uaiso::Manager* manager, uaiso::LangName lang)
+void UaisoQtc::addSearchPaths(uaiso::Manager* manager, uaiso::LangId lang)
 {
     UaisoSettings settings;
     settings.load(Core::ICore::settings());

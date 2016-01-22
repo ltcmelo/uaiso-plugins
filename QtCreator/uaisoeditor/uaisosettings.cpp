@@ -178,7 +178,7 @@ void UaisoSettings::store(QSettings *settings) const
     for (auto const& option : m_options) {
         store(settings,
                       option.second,
-                      kUaiso + QString::fromStdString(langName(LangName(option.first))));
+                      kUaiso + QString::fromStdString(langName(LangId(option.first))));
     }
 }
 
